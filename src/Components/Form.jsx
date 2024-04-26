@@ -4,14 +4,20 @@ function Form() {
 
     const [obj, setobj] = useState({})
     const [array, setarray] = useState([])
+    let [count, setcount] = useState(0)
+
     const saveData = (e) => {
         e.preventDefault();
+        count++;  
+        setcount(count)
+        obj.id = count;
         setarray([ ...array , obj])
     }
 
     const getInputValue = (e) => {
         setobj({ ...obj ,[e.target.name] : e.target.value})
     }
+
   return (
     <>
 
@@ -35,8 +41,8 @@ function Form() {
         </form>
 
         <table className='table mt-3 myTable'>
-            <thead >
-                <tr >
+            <thead>
+                <tr>
                     <th className='bg-dark text-white'>ID</th>
                     <th className='bg-dark text-white'>First Name</th>
                     <th className='bg-dark text-white'>Middle Name</th>
@@ -47,8 +53,8 @@ function Form() {
             <tbody>
                 {
                     array.map((element, index) => {
-                        return <tr>
-                            <td>{index +1}</td>
+                        return <tr key={index}>
+                            <td>{element.id}</td>
                             <td>{element.fname}</td>
                             <td>{element.mname}</td>
                             <td>{element.lname}</td>
